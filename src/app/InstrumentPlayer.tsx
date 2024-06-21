@@ -23,7 +23,7 @@ export function InstrumentPlayer() {
     );
   }, []);
 
-  function clickPiano() {
+  function clickProg1() {
     if (!piano) return;
 
     const now = Tone.now();
@@ -32,6 +32,28 @@ export function InstrumentPlayer() {
     piano.triggerAttackRelease(["C4", "E4", "G4"], "1", now + 2);
     piano.triggerAttackRelease(["B3", "D4", "G4"], "1", now + 3);
     piano.triggerAttackRelease(["C4", "E4", "G4"], "1", now + 4);
+  }
+
+  function clickProg2() {
+    if (!piano) return;
+
+    const now = Tone.now();
+    piano.triggerAttackRelease(["C4", "E4", "G4"], "1", now);
+    piano.triggerAttackRelease(["Bb3", "C4", "E4", "G4"], "1", now + 1);
+    piano.triggerAttackRelease(["A3", "C4", "F4"], "1", now + 2);
+    piano.triggerAttackRelease(["B3", "D4", "G4"], "1", now + 3);
+    piano.triggerAttackRelease(["C4", "E4", "G4"], "1", now + 4);
+  }
+
+  function clickProg3() {
+    if (!piano) return;
+
+    const now = Tone.now();
+    piano.triggerAttackRelease(["A3", "C4", "E4"], "1", now);
+    piano.triggerAttackRelease(["F3", "A3", "C4"], "1", now + 1);
+    piano.triggerAttackRelease(["G3", "B3", "D4"], "1", now + 2);
+    piano.triggerAttackRelease(["E3", "G#3", "B3"], "1", now + 3);
+    piano.triggerAttackRelease(["A3", "C4", "E4"], "1", now + 4);
   }
 
   function clickScale() {
@@ -63,9 +85,9 @@ export function InstrumentPlayer() {
 
   return (
     <div>
-      <button onClick={clickPiano} id="playPianoC">
-        Play Chord Progression
-      </button>
+      <button onClick={clickProg1}>Play Chord Progression 1</button>
+      <button onClick={clickProg2}>Play Chord Progression 2</button>
+      <button onClick={clickProg3}>Play Chord Progression 3</button>
       <button onClick={clickScale}>Play Scale</button>
     </div>
   );
