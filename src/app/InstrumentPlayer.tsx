@@ -1,6 +1,13 @@
 "use client";
 
-import { bpmToQuarterNoteDuration } from "@/musicCalc";
+import {
+  bpmToQuarterNoteDuration,
+  getPlayableSequence,
+  majorFourth,
+  majorSecond,
+  majorThird,
+  minorThird,
+} from "@/musicCalc";
 import { useEffect, useState } from "react";
 import * as Tone from "tone";
 
@@ -40,27 +47,27 @@ export function InstrumentPlayer() {
     const now = Tone.now();
     const quarter = bpmToQuarterNoteDuration(tempoBpm);
     piano.triggerAttackRelease(
-      ["C4", "E4", "G4"],
+      getPlayableSequence("C4", [majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 0
     );
     piano.triggerAttackRelease(
-      ["C4", "F4", "A4"],
+      getPlayableSequence("C4", [majorFourth, majorThird]),
       `${quarter}`,
       now + quarter * 1
     );
     piano.triggerAttackRelease(
-      ["C4", "E4", "G4"],
+      getPlayableSequence("C4", [majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 2
     );
     piano.triggerAttackRelease(
-      ["B3", "D4", "G4"],
+      getPlayableSequence("B3", [minorThird, majorFourth]),
       `${quarter}`,
       now + quarter * 3
     );
     piano.triggerAttackRelease(
-      ["C4", "E4", "G4"],
+      getPlayableSequence("C4", [majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 4
     );
@@ -72,27 +79,27 @@ export function InstrumentPlayer() {
     const now = Tone.now();
     const quarter = bpmToQuarterNoteDuration(tempoBpm);
     piano.triggerAttackRelease(
-      ["C4", "E4", "G4"],
+      getPlayableSequence("C4", [majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 0
     );
     piano.triggerAttackRelease(
-      ["Bb3", "C4", "E4", "G4"],
+      getPlayableSequence("Bb3", [majorSecond, majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 1
     );
     piano.triggerAttackRelease(
-      ["A3", "C4", "F4"],
+      getPlayableSequence("A3", [minorThird, majorFourth]),
       `${quarter}`,
       now + quarter * 2
     );
     piano.triggerAttackRelease(
-      ["B3", "D4", "G4"],
+      getPlayableSequence("B3", [minorThird, majorFourth]),
       `${quarter}`,
       now + quarter * 3
     );
     piano.triggerAttackRelease(
-      ["C4", "E4", "G4"],
+      getPlayableSequence("C4", [majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 4
     );
@@ -104,27 +111,27 @@ export function InstrumentPlayer() {
     const now = Tone.now();
     const quarter = bpmToQuarterNoteDuration(tempoBpm);
     piano.triggerAttackRelease(
-      ["A3", "C4", "E4"],
+      getPlayableSequence("A3", [minorThird, majorThird]),
       `${quarter}`,
       now + quarter * 0
     );
     piano.triggerAttackRelease(
-      ["F3", "A3", "C4"],
+      getPlayableSequence("F3", [majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 1
     );
     piano.triggerAttackRelease(
-      ["G3", "B3", "D4"],
+      getPlayableSequence("G3", [majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 2
     );
     piano.triggerAttackRelease(
-      ["E3", "G#3", "B3"],
+      getPlayableSequence("E3", [majorThird, minorThird]),
       `${quarter}`,
       now + quarter * 3
     );
     piano.triggerAttackRelease(
-      ["A3", "C4", "E4"],
+      getPlayableSequence("A3", [minorThird, majorThird]),
       `${quarter}`,
       now + quarter * 4
     );
@@ -135,26 +142,13 @@ export function InstrumentPlayer() {
 
     const now = Tone.now();
     const quarter = bpmToQuarterNoteDuration(tempoBpm);
-    const notes = [
+    const notes = getPlayableSequence(
       "C4",
-      "D4",
-      "E4",
-      "F4",
-      "G4",
-      "A4",
-      "B4",
-      "C5",
-      "D5",
-      "E5",
-      "F5",
-      "G5",
-      "A5",
-      "B5",
-      "C6",
-    ];
+      [2, 2, 1, 2, 2, 2, 1, 2, 2, 1, 2, 2, 2, 1]
+    );
     for (let i = 0; i < notes.length; i++) {
       piano.triggerAttackRelease(
-        notes[i],
+        notes[i]!,
         `${quarter / 2}`,
         now + (quarter / 2) * i
       );
