@@ -219,7 +219,7 @@ export function getAbsIndexSequence(
   return absIndices;
 }
 
-function convertAbsolutePitchIndex(absIndex: number) {
+export function getPlayablePitch(absIndex: number) {
   const scaleIndex = absIndex % pitches.length;
   const pitchNumber = Math.floor(absIndex / pitches.length);
   const pitchEquivalentGroup = pitches[scaleIndex];
@@ -248,7 +248,10 @@ export function getPlayableSequence(
     startingPitch,
     halfStepIntervals
   );
-  return absIndexSequence.map((absIndex) =>
-    convertAbsolutePitchIndex(absIndex)
-  );
+  return absIndexSequence.map((absIndex) => getPlayablePitch(absIndex));
+}
+
+export function absPitchIndexToPitchData(absIndex: number) {
+  const converted = getPlayablePitch(absIndex);
+  return parsePitch(converted);
 }
